@@ -1,2 +1,3 @@
 step,images,minutes,note
 gold_manual,4,15,Gan tay 4 anh gold khong AI (bam gio that)
+batch_review,24,41,Duyet 24 anh batch co pre-label + 12 bay theo checklist 4 buoc (bam gio that)

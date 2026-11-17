@@ -23,22 +23,22 @@
 
 | Trạng thái | Số | Tỉ lệ | Mẫu số |
 |---|---|---|---|
-| accepted | <<>> | <<>> | <<box máy>> |
-| edited | <<>> | <<>> | <<>> |
-| deleted | <<>> | <<>> | <<>> |
-| added | <<>> | <<>> | <<đối tượng sau duyệt>> |
+| accepted | 512 | 82,3% | 622 box máy |
+| edited | 37 | 5,9% | 622 box máy |
+| deleted | 73 | 11,7% | 622 box máy |
+| added | 60 | 9,9% | 609 đối tượng sau duyệt |
 
-- Lớp nào máy tệ nhất? Vì sao (dẫn ảnh)? <<>>
-- So với gold: precision / recall của **máy** <<>> (mẫu số: <<đối tượng gold>>)
+- Lớp nào máy tệ nhất? Vì sao (dẫn ảnh)? `three_wheeler`: trong 41 box máy chỉ 10 giữ nguyên (24%), 10 sửa, 21 xoá, và thêm 4 box vẽ tay. Nguyên nhân: YOLO26 không có lớp ba bánh nên gán `car`/`bicycle`, YOLOE nhầm truck thành ba bánh (img_002) và sót xích lô (img_032) (xem r01–r05 trong `model_log.csv`). `motorbike` cũng đáng chú ý: 32 box bị xoá / 236 box máy (13,6%), nhiều ở ảnh đông xe (ví dụ img_018) vì ngưỡng thấp 0.1. Trong deleted + added có 11 ca đổi lớp (box đúng chỗ, sai lớp), nên số vật máy sót thật ≈ 60 − 11 = 49.
+- So với gold: precision / recall của **máy** 65,2% (KTC 95%: 53–76%) / 84,3% (KTC 95%: 72–92%) (mẫu số: 51 đối tượng gold trong 4 ảnh). Con số lạc quan vì ngưỡng chọn trên chính gold.
 
 ## 3. Thiên kiến tự động hóa và ảnh bẫy
 
-- Bắt bẫy: <<.../12>>; loại nào lọt: <<>>; vì sao (bạn đã bỏ bước nào của checklist)? <<>>
-- Accepted cao mà bắt bẫy thấp (hoặc ngược lại) nói gì về cách bạn duyệt? <<>>
+- Bắt bẫy: 8/12 = 66,7% (KTC 95%: 39–86%, dưới ngưỡng 80%); mỗi loại bắt 2/3 (wrong_class, loose, extra, missing); loại nào lọt: 4 bẫy, mỗi loại lọt 1: img_035 `wrong_class` (motorbike nhỏ ở mép phải bị đổi thành bicycle), img_004 `loose` (box three_wheeler bị kéo to), img_027 `missing` (sót motorbike sát mép trái), img_005 `extra` (box truck ma sát mép trên); vì sao (bạn đã bỏ bước nào của checklist)? <<TỰ VIẾT: bạn nhớ mình đã bỏ bước nào; 3/4 bẫy nằm ở mép ảnh hoặc vật nhỏ>>. Quyết định: giữ nguyên số đo 8/12 để báo cáo trung thực, không duyệt lại để "chữa" con số (đã biết đáp án sẽ làm phép đo mất giá trị).
+- Accepted cao mà bắt bẫy thấp (hoặc ngược lại) nói gì về cách bạn duyệt? Accepted 82,3% nhưng bắt bẫy chỉ 66,7%: bạn tin nhãn máy khá nhiều và lỗi lọt nằm ở chỗ mắt ít nhìn (mép ảnh, vật nhỏ, box nhìn hợp lý). Lỗi của máy không hiện trên điểm số (vật bị sót, box lỏng, nhầm lớp) nên chỉ lộ ra khi quét ảnh trước.
 
 ## 4. Máy có đáng dùng không?
 
-- Thời gian (từ `time_log.csv`): gán tay <<... phút/ảnh>> vs duyệt <<... phút/ảnh>>. Thiên lệch (bạn gán gold trước nên đã quen cảnh): <<>>
+- Thời gian (từ `time_log.csv`): gán tay 15 phút / 4 ảnh = 3,75 phút/ảnh vs duyệt 41 phút / 24 ảnh ≈ 1,71 phút/ảnh (nhanh hơn ~54%). Thiên lệch: gold gán trước nên đã quen cảnh; ảnh batch có thể dễ / khó khác ảnh gold; thời gian duyệt chưa gồm việc sửa lại ở ảnh bẫy lọt.
 - Kết luận: <<có / không / chỉ cho lớp nào>>, dựa trên <<số liệu>>
 - **Ba quy tắc giảm thiên kiến của bạn** (mỗi quy tắc kiểm tra được bằng số hoặc việc làm):
   1. <<>>
