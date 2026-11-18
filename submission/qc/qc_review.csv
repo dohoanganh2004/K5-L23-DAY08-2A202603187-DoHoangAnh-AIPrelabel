@@ -1,0 +1,8 @@
+image,object_id,error_type,reviewer,note
+img_003.jpg,,khong,ban,không thấy lỗi khi kiểm bằng mắt
+img_006.jpg,,khong,ban,không thấy lỗi khi kiểm bằng mắt
+img_014.jpg,169,thua,ban,"three_wheeler conf 0.63: gánh hàng / vật không thuộc lớp nào bị gán ba bánh (YOLOE, ngưỡng 0.15)"
+img_014.jpg,170,thua,ban,"three_wheeler conf 0.33: gánh hàng / vật không thuộc lớp nào bị gán ba bánh (YOLOE, ngưỡng 0.15)"
+img_014.jpg,171,thua,ban,"three_wheeler conf 0.19: gánh hàng / vật không thuộc lớp nào bị gán ba bánh (YOLOE, ngưỡng 0.15)"
+img_031.jpg,,khong,ban,không thấy lỗi khi kiểm bằng mắt
+img_035.jpg,609,sai_lop,ban,motorbike nhỏ ở mép phải bị gán bicycle (bẫy wrong_class lọt khi review)
